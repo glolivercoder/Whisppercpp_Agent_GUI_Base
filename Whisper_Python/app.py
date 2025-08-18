@@ -28,7 +28,7 @@ except ImportError:
 
 # Caminho para o executável whisper.cpp e modelos
 WHISPER_BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-WHISPER_EXECUTABLE = os.path.join(WHISPER_BASE_DIR, 'main')
+WHISPER_EXECUTABLE = os.path.join(WHISPER_BASE_DIR, 'build', 'bin', 'Release', 'main.exe')
 MODELS_DIR = os.path.join(WHISPER_BASE_DIR, 'models')
 
 # Criar diretórios necessários se não existirem
@@ -77,8 +77,8 @@ def transcribe_audio(audio_path, model_name='base', language=None):
             f.write(demo_text)
         
         return {
-            "id": transcription_id,
-            "text": demo_text,
+            "transcription_id": transcription_id,
+            "transcription": demo_text,
             "file": os.path.basename(audio_path),
             "model": model_name,
             "language": language or "auto",
@@ -87,25 +87,25 @@ def transcribe_audio(audio_path, model_name='base', language=None):
         }
     
     # Modo normal - usar whisper.cpp
-    model_path = os.path.join(MODELS_DIR, model_name)
+    model_path = os.path.join(MODELS_DIR, f"{model_name}.bin")
     
     # Verificar se o modelo existe
     if not os.path.exists(model_path):
         logger.error(f"Modelo não encontrado: {model_path}")
-        return {"error": "Modelo não encontrado"}
+        return {"success": False, "error": f"Modelo não encontrado: {model_name}"}
     
     # Preparar comando para whisper.cpp
     cmd = [WHISPER_EXECUTABLE, '-m', model_path, '-f', audio_path]
     
     # Adicionar opção de idioma se especificado
-    if language:
+    if language and language != 'auto':
         cmd.extend(['-l', language])
     
     logger.info(f"Executando comando: {' '.join(cmd)}")
     
     try:
         # Executar whisper.cpp
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        result = subprocess.run(cmd, capture_output=True, text=True, check=True, encoding='utf-8')
         
         # Salvar transcrição
         transcription_path = os.path.join(app.config['TRANSCRIPTION_FOLDER'], f"{transcription_id}.txt")
@@ -114,8 +114,8 @@ def transcribe_audio(audio_path, model_name='base', language=None):
             f.write(result.stdout)
         
         return {
-            "id": transcription_id,
-            "text": result.stdout,
+            "transcription_id": transcription_id,
+            "transcription": result.stdout,
             "file": os.path.basename(audio_path),
             "model": model_name,
             "language": language or "auto",
@@ -125,10 +125,10 @@ def transcribe_audio(audio_path, model_name='base', language=None):
     except subprocess.CalledProcessError as e:
         logger.error(f"Erro ao executar whisper.cpp: {e}")
         logger.error(f"Saída de erro: {e.stderr}")
-        return {"error": "Erro ao processar áudio", "details": e.stderr}
+        return {"success": False, "error": "Erro ao processar áudio", "details": e.stderr}
     except Exception as e:
         logger.error(f"Erro inesperado: {e}")
-        return {"error": "Erro inesperado", "details": str(e)}
+        return {"success": False, "error": "Erro inesperado", "details": str(e)}
 
 # Rotas da aplicação
 @app.route('/')
@@ -198,21 +198,32 @@ def upload_file():
 
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
-    data = request.json
+    # Check if request contains JSON data
+    if request.is_json:
+        data = request.get_json()
+    else:
+        # If not JSON, try to get form data
+        data = request.form.to_dict()
     
-    # Verificar dados necessários
-    if not data or 'file_path' not in data:
-        return jsonify({"error": "Caminho do arquivo não fornecido"}), 400
+    # Check for required data
+    if not data or 'filename' not in data:
+        return jsonify({"success": False, "error": "Nome do arquivo não fornecido"}), 400
     
-    file_path = data['file_path']
+    filename = data['filename']
     model = data.get('model', 'base')
     language = data.get('language', None)
     
-    # Transcrever áudio
+    # Construct full file path
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+    
+    # Transcribe audio
     result = transcribe_audio(file_path, model, language)
     
     if "error" in result:
-        return jsonify(result), 400
+        return jsonify({"success": False, "error": result["error"]}), 400
+    
+    # Add success flag to result
+    result["success"] = True
     
     return jsonify(result)
 

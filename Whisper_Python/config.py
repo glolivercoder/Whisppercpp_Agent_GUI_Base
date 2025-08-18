@@ -12,7 +12,7 @@ TRANSCRIPTION_FOLDER = os.path.join(BASE_DIR, 'transcriptions')
 MODELS_DIR = os.path.join(WHISPER_BASE_DIR, 'models')
 
 # Caminho para o executável whisper.cpp
-WHISPER_EXECUTABLE = os.path.join(WHISPER_BASE_DIR, 'main')
+WHISPER_EXECUTABLE = os.path.join(WHISPER_BASE_DIR, 'build', 'bin', 'Release', 'whisper-cli.exe')
 
 # Configurações de upload
 MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max upload size

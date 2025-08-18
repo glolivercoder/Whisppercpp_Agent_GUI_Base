@@ -1,6 +1,8 @@
 @echo off
 REM Script para iniciar a aplicação Whisper.cpp Web App no Windows
 
+cd /d "%~dp0"
+
 echo Iniciando Whisper.cpp Web App...
 echo.
 

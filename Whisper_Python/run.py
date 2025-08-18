@@ -37,12 +37,9 @@ try:
     import ffmpeg
 except ImportError as e:
     logger.error(f"Dependência não encontrada: {e}")
-    logger.info("Instalando dependências necessárias...")
-    
-    # Instalar dependências
-    import subprocess
-    subprocess.check_call([sys.executable, "-m", "pip", "install", "-r", "requirements.txt"])
-    logger.info("Dependências instaladas com sucesso!")
+    logger.error("Por favor, instale as dependências executando:")
+    logger.error("pip install -r requirements.txt")
+    sys.exit(1)
 
 # Verificar se o executável whisper.cpp existe
 from config import WHISPER_EXECUTABLE, MODELS_DIR
