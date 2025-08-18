@@ -358,8 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Clear previous results
         if (resultContainer) {
-            resultContainer.innerHTML = '';
-            resultContainer.style.display = 'none';
+            resultContainer.value = '';
         }
         
         // Reset copy and download buttons
@@ -489,12 +488,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Display transcription results
     function displayTranscription(transcription, transcriptionId, withWordTimestamps) {
         if (resultContainer) {
-            resultContainer.style.display = 'block';
-            
             // For now, we'll display the transcription as plain text
             // In the future, we can implement word-level or segment-level timestamps
             resultContainer.classList.remove('with-timestamps');
-            resultContainer.textContent = typeof transcription === 'object' ? JSON.stringify(transcription, null, 2) : transcription;
+            resultContainer.value = typeof transcription === 'object' ? JSON.stringify(transcription, null, 2) : transcription;
             
             // Store transcription ID for later reference
             if (transcriptionId) {
@@ -506,7 +503,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Copy transcription to clipboard
     function copyTranscription() {
         if (resultContainer) {
-            const text = resultContainer.textContent || resultContainer.innerText;
+            const text = resultContainer.value;
             navigator.clipboard.writeText(text)
                 .then(() => {
                     showAlert('Transcrição copiada para a área de transferência!', 'success');
@@ -521,7 +518,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Download transcription as text file
     function downloadTranscription() {
         if (resultContainer) {
-            const text = resultContainer.textContent || resultContainer.innerText;
+            const text = resultContainer.value;
             const blob = new Blob([text], { type: 'text/plain' });
             const url = URL.createObjectURL(blob);
             

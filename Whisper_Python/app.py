@@ -87,7 +87,8 @@ def transcribe_audio(audio_path, model_name='base', language=None):
         }
     
     # Modo normal - usar whisper.cpp
-    model_path = os.path.join(MODELS_DIR, f"{model_name}.bin")
+    model_filename = model_name if model_name.endswith('.bin') else f"{model_name}.bin"
+    model_path = os.path.join(MODELS_DIR, model_filename)
     
     # Verificar se o modelo existe
     if not os.path.exists(model_path):
