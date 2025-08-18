@@ -1,0 +1,184 @@
+{
+  "nome": "whisper.cpp",
+  "descricao": "Implementação de alta performance do modelo Whisper da OpenAI para reconhecimento automático de fala (ASR)",
+  "repositorio": "https://github.com/ggml-org/whisper.cpp",
+  "versao_estavel": "v1.7.6",
+  "caracteristicas": [
+    "Implementação em C/C++ puro sem dependências",
+    "Suporte otimizado para Apple Silicon via ARM NEON, Accelerate framework, Metal e Core ML",
+    "Suporte a instruções AVX para arquiteturas x86",
+    "Suporte a instruções VSX para arquiteturas POWER",
+    "Precisão mista F16 / F32",
+    "Suporte a quantização de inteiros",
+    "Zero alocações de memória em tempo de execução",
+    "Suporte a Vulkan",
+    "Suporte a inferência apenas em CPU",
+    "Suporte eficiente a GPU para NVIDIA",
+    "Suporte a OpenVINO",
+    "Suporte a Ascend NPU",
+    "Suporte a GPU Moore Threads",
+    "API estilo C",
+    "Detecção de Atividade de Voz (VAD)"
+  ],
+  "plataformas_suportadas": [
+    "Mac OS (Intel e Arm)",
+    "iOS",
+    "Android",
+    "Java",
+    "Linux / FreeBSD",
+    "WebAssembly",
+    "Windows (MSVC e MinGW)",
+    "Raspberry Pi",
+    "Docker"
+  ],
+  "modelos": [
+    {
+      "nome": "tiny",
+      "tamanho_disco": "75 MiB",
+      "uso_memoria": "~273 MB",
+      "caracteristicas": "Mais rápido, menos preciso"
+    },
+    {
+      "nome": "base",
+      "tamanho_disco": "142 MiB",
+      "uso_memoria": "~388 MB",
+      "caracteristicas": "Bom equilíbrio para uso geral"
+    },
+    {
+      "nome": "small",
+      "tamanho_disco": "466 MiB",
+      "uso_memoria": "~852 MB",
+      "caracteristicas": "Mais preciso que base, ainda eficiente"
+    },
+    {
+      "nome": "medium",
+      "tamanho_disco": "1.5 GiB",
+      "uso_memoria": "~2.1 GB",
+      "caracteristicas": "Alta precisão, requer mais recursos"
+    },
+    {
+      "nome": "large",
+      "tamanho_disco": "2.9 GiB",
+      "uso_memoria": "~3.9 GB",
+      "caracteristicas": "Máxima precisão, muito exigente"
+    }
+  ],
+  "inicio_rapido": [
+    "Clonar o repositório: git clone https://github.com/ggml-org/whisper.cpp.git",
+    "Navegar para o diretório: cd whisper.cpp",
+    "Baixar um modelo: sh ./models/download-ggml-model.sh base.en",
+    "Construir o projeto: cmake -B build && cmake --build build -j --config Release",
+    "Transcrever um arquivo de áudio: ./build/bin/whisper-cli -f samples/jfk.wav"
+  ],
+  "integracao_python": {
+    "exemplos": [
+      {
+        "nome": "whisper_processor.py",
+        "descricao": "Script simples para processar áudio usando whisper.cpp",
+        "uso": "python whisper_processor.py <arquivo_wav> [<nome_modelo>]"
+      },
+      {
+        "nome": "server.py",
+        "descricao": "Servidor HTTP para servir aplicações web que usam whisper.cpp",
+        "uso": "python server.py"
+      }
+    ],
+    "ambiente_virtual": {
+      "descricao": "Recomendado usar ambiente virtual Python para isolamento de dependências",
+      "comandos": [
+        "python -m venv venv",
+        "source venv/bin/activate (Linux/Mac) ou venv\Scripts\activate (Windows)",
+        "pip install -r requirements.txt"
+      ]
+    },
+    "openvino": {
+      "descricao": "Suporte a OpenVINO para aceleração em CPUs Intel e GPUs",
+      "setup": [
+        "cd models",
+        "python -m venv openvino_conv_env",
+        "openvino_conv_env\Scripts\activate (Windows) ou source openvino_conv_env/bin/activate (Linux/Mac)",
+        "python -m pip install --upgrade pip",
+        "pip install -r requirements-openvino.txt",
+        "python convert-whisper-to-openvino.py --model base.en"
+      ]
+    }
+  },
+  "otimizacoes": [
+    {
+      "nome": "Quantização",
+      "descricao": "Reduz o tamanho do modelo e pode melhorar a eficiência",
+      "comandos": [
+        "cmake -B build",
+        "cmake --build build -j --config Release",
+        "./build/bin/quantize models/ggml-base.en.bin models/ggml-base.en-q5_0.bin q5_0"
+      ]
+    },
+    {
+      "nome": "Core ML",
+      "descricao": "Aceleração em dispositivos Apple Silicon via Apple Neural Engine",
+      "comandos": [
+        "pip install ane_transformers openai-whisper coremltools",
+        "./models/generate-coreml-model.sh base.en",
+        "cmake -B build -DWHISPER_COREML=1",
+        "cmake --build build -j --config Release"
+      ]
+    },
+    {
+      "nome": "BLAS",
+      "descricao": "Aceleração em CPU via OpenBLAS",
+      "comandos": [
+        "cmake -B build -DGGML_BLAS=1",
+        "cmake --build build -j --config Release"
+      ]
+    },
+    {
+      "nome": "CUDA",
+      "descricao": "Aceleração em GPUs NVIDIA",
+      "comandos": [
+        "cmake -B build -DGGML_CUDA=1",
+        "cmake --build build -j --config Release"
+      ]
+    },
+    {
+      "nome": "Vulkan",
+      "descricao": "Aceleração em GPUs de diversos fabricantes",
+      "comandos": [
+        "cmake -B build -DGGML_VULKAN=1",
+        "cmake --build build -j --config Release"
+      ]
+    }
+  ],
+  "exemplos_avancados": [
+    {
+      "nome": "Entrada de áudio em tempo real",
+      "descricao": "Exemplo de inferência em tempo real a partir do microfone",
+      "comandos": [
+        "cmake -B build -DWHISPER_SDL2=ON",
+        "cmake --build build -j --config Release",
+        "./build/bin/whisper-stream -m ./models/ggml-base.en.bin -t 8 --step 500 --length 5000"
+      ]
+    },
+    {
+      "nome": "Codificação de cores por confiança",
+      "descricao": "Destaca palavras com alta ou baixa confiança usando cores",
+      "comandos": [
+        "./build/bin/whisper-cli -m models/ggml-base.en.bin -f samples/gb0.wav --print-colors"
+      ]
+    },
+    {
+      "nome": "Timestamps em nível de palavra",
+      "descricao": "Obtém timestamps para cada palavra individualmente",
+      "comandos": [
+        "./build/bin/whisper-cli -m ./models/ggml-base.en.bin -f ./samples/jfk.wav -ml 1"
+      ]
+    },
+    {
+      "nome": "Segmentação de falantes",
+      "descricao": "Identifica diferentes falantes no áudio (experimental)",
+      "comandos": [
+        "./models/download-ggml-model.sh small.en-tdrz",
+        "./build/bin/whisper-cli -f ./samples/a13.wav -m ./models/ggml-small.en-tdrz.bin -tdrz"
+      ]
+    }
+  ]
+}
