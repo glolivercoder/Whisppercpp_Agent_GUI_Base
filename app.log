@@ -1,52 +1,48 @@
-2025-08-18 22:14:57,050 - whisper_app - INFO - Iniciando servidor em http://127.0.0.1:5000
+2025-08-18 23:03:02,347 - whisper_app - INFO - Iniciando servidor em http://127.0.0.1:5000
  * Serving Flask app 'app'
  * Debug mode: off
-2025-08-18 22:14:57,066 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+2025-08-18 23:03:02,361 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
  * Running on http://127.0.0.1:5000
-2025-08-18 22:14:57,066 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
-2025-08-18 22:15:02,510 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:02] "GET /?ide_webview_request_time=1755566102132 HTTP/1.1" 200 -
-2025-08-18 22:15:02,775 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:02] "GET /static/css/style.css HTTP/1.1" 200 -
-2025-08-18 22:15:02,830 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:02] "GET /static/css/waveform.css HTTP/1.1" 200 -
-2025-08-18 22:15:02,856 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:02] "GET /static/js/main.js HTTP/1.1" 200 -
-2025-08-18 22:15:02,856 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:02] "GET /static/js/recorder.js HTTP/1.1" 200 -
-2025-08-18 22:15:02,968 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:02] "GET /models HTTP/1.1" 200 -
-2025-08-18 22:15:03,293 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:03] "[33mGET /@vite/client HTTP/1.1[0m" 404 -
-2025-08-18 22:15:22,363 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:22] "POST /upload HTTP/1.1" 200 -
-2025-08-18 22:15:22,675 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\for-tests-ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\17b37b70-4937-4717-b943-613040d028b6_recorded_audio.wav
-2025-08-18 22:15:22,742 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:22] "POST /transcribe HTTP/1.1" 200 -
-2025-08-18 22:15:40,091 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:40] "GET / HTTP/1.1" 200 -
-2025-08-18 22:15:40,110 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:40] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
-2025-08-18 22:15:40,112 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:40] "GET /static/css/style.css HTTP/1.1" 200 -
-2025-08-18 22:15:40,112 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:40] "GET /static/css/waveform.css HTTP/1.1" 200 -
-2025-08-18 22:15:40,112 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:40] "GET /static/js/main.js HTTP/1.1" 200 -
-2025-08-18 22:15:40,112 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:40] "GET /static/js/recorder.js HTTP/1.1" 200 -
-2025-08-18 22:15:40,435 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:40] "GET /models HTTP/1.1" 200 -
-2025-08-18 22:15:51,481 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:51] "POST /upload HTTP/1.1" 200 -
-2025-08-18 22:15:51,496 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:51] "GET /uploads/ed4695b3-1f51-4744-906b-0cd48cc0527a_Gravando.m4a HTTP/1.1" 200 -
-2025-08-18 22:15:53,857 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:15:53] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 204 -
-2025-08-18 22:16:01,120 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\for-tests-ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\ed4695b3-1f51-4744-906b-0cd48cc0527a_Gravando.m4a -l pt
-2025-08-18 22:16:01,175 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:16:01] "POST /transcribe HTTP/1.1" 200 -
-2025-08-18 22:16:30,112 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\ed4695b3-1f51-4744-906b-0cd48cc0527a_Gravando.m4a -l pt
-2025-08-18 22:16:30,277 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:16:30] "POST /transcribe HTTP/1.1" 200 -
-2025-08-18 22:22:12,052 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:22:12] "POST /upload HTTP/1.1" 200 -
-2025-08-18 22:22:12,064 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:22:12] "GET /uploads/58541e72-d4dd-43e3-b361-1398fb094e43_testewhisper.wav HTTP/1.1" 200 -
-2025-08-18 22:22:20,146 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\58541e72-d4dd-43e3-b361-1398fb094e43_testewhisper.wav -l pt
-2025-08-18 22:22:21,640 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:22:21] "POST /transcribe HTTP/1.1" 200 -
-2025-08-18 22:25:16,278 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:25:16] "POST /upload HTTP/1.1" 200 -
-2025-08-18 22:25:16,281 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\66bddf78-b844-4f04-9e90-a54b1f55506c_recorded_audio.wav -l pt
-2025-08-18 22:25:16,457 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:25:16] "POST /transcribe HTTP/1.1" 200 -
-2025-08-18 22:26:11,422 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:26:11] "POST /upload HTTP/1.1" 200 -
-2025-08-18 22:26:11,426 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\328c407b-72ac-4904-81bc-1ac5cfe9f300_recorded_audio.wav -l pt
-2025-08-18 22:26:11,704 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:26:11] "POST /transcribe HTTP/1.1" 200 -
-2025-08-18 22:26:16,966 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:26:16] "POST /upload HTTP/1.1" 200 -
-2025-08-18 22:26:16,974 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\for-tests-ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\b4902591-e648-4b17-b362-c578b2b207f3_recorded_audio.wav -l pt
-2025-08-18 22:26:17,037 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:26:17] "POST /transcribe HTTP/1.1" 200 -
-2025-08-18 22:26:23,006 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:26:23] "POST /upload HTTP/1.1" 200 -
-2025-08-18 22:26:23,009 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\for-tests-ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\3b73bba8-d752-4e48-98ac-72c1525a785f_recorded_audio.wav
-2025-08-18 22:26:23,072 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:26:23] "POST /transcribe HTTP/1.1" 200 -
-2025-08-18 22:26:29,701 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:26:29] "POST /upload HTTP/1.1" 200 -
-2025-08-18 22:26:29,707 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\for-tests-ggml-base.en.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\3600bb0b-d87e-4c2c-ad15-e4736a97cc80_recorded_audio.wav
-2025-08-18 22:26:29,874 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:26:29] "POST /transcribe HTTP/1.1" 200 -
-2025-08-18 22:26:35,565 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:26:35] "POST /upload HTTP/1.1" 200 -
-2025-08-18 22:26:35,573 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\for-tests-ggml-large.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\26416bc2-7e64-4351-a678-0147e3d5a703_recorded_audio.wav
-2025-08-18 22:26:35,701 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 22:26:35] "POST /transcribe HTTP/1.1" 200 -
+2025-08-18 23:03:02,361 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-08-18 23:03:09,679 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:09] "GET / HTTP/1.1" 200 -
+2025-08-18 23:03:09,695 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:09] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-08-18 23:03:09,773 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:09] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-08-18 23:03:09,780 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:09] "[36mGET /static/css/waveform.css HTTP/1.1[0m" 304 -
+2025-08-18 23:03:09,783 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:09] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-08-18 23:03:09,784 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:09] "GET /static/js/main.js HTTP/1.1" 200 -
+2025-08-18 23:03:09,860 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:09] "GET /models HTTP/1.1" 200 -
+2025-08-18 23:03:39,902 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:39] "GET / HTTP/1.1" 200 -
+2025-08-18 23:03:39,914 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:39] "[33mGET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1[0m" 404 -
+2025-08-18 23:03:39,919 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:39] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-08-18 23:03:39,920 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:39] "[36mGET /static/css/waveform.css HTTP/1.1[0m" 304 -
+2025-08-18 23:03:39,922 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:39] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-08-18 23:03:39,923 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:39] "[36mGET /static/js/recorder.js HTTP/1.1[0m" 304 -
+2025-08-18 23:03:40,127 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:40] "GET /models HTTP/1.1" 200 -
+2025-08-18 23:03:56,667 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:03:56] "[35m[1mGET /favicon.ico HTTP/1.1[0m" 204 -
+2025-08-18 23:04:08,373 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:04:08] "POST /upload HTTP/1.1" 200 -
+2025-08-18 23:04:08,382 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\f32993bb-3bab-4f87-8b98-1331b3ed80ee_recorded_audio.wav -l pt
+2025-08-18 23:04:08,553 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:04:08] "POST /transcribe HTTP/1.1" 200 -
+2025-08-18 23:04:22,983 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:04:22] "POST /upload HTTP/1.1" 200 -
+2025-08-18 23:04:22,987 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\for-tests-ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\e23328c1-d54e-4576-b068-914c92125de9_recorded_audio.wav -l pt
+2025-08-18 23:04:23,047 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:04:23] "POST /transcribe HTTP/1.1" 200 -
+2025-08-18 23:04:38,086 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:04:38] "POST /upload HTTP/1.1" 200 -
+2025-08-18 23:04:38,106 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\for-tests-silero-v5.1.2-ggml.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\70a9c9ac-2528-4ab9-8716-84e3ec086d2b_recorded_audio.wav -l pt
+2025-08-18 23:04:38,236 - app - ERROR - Erro ao executar whisper.cpp: Command '['F:\\Projetos2025BKP\\WhispperCC_STT\\whisper.cpp\\build\\bin\\Release\\whisper-cli.exe', '-m', 'F:\\Projetos2025BKP\\WhispperCC_STT\\whisper.cpp\\models\\for-tests-silero-v5.1.2-ggml.bin', '-f', 'F:\\Projetos2025BKP\\WhispperCC_STT\\whisper.cpp\\Whisper_Python\\uploads\\70a9c9ac-2528-4ab9-8716-84e3ec086d2b_recorded_audio.wav', '-l', 'pt']' returned non-zero exit status 3221226505.
+2025-08-18 23:04:38,236 - app - ERROR - Saída de erro: whisper_init_from_file_with_params_no_state: loading model from 'F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\for-tests-silero-v5.1.2-ggml.bin'
+whisper_init_with_params_no_state: use gpu    = 1
+whisper_init_with_params_no_state: flash attn = 0
+whisper_init_with_params_no_state: gpu_device = 0
+whisper_init_with_params_no_state: dtw        = 0
+whisper_init_with_params_no_state: devices    = 1
+whisper_init_with_params_no_state: backends   = 1
+whisper_model_load: loading model
+F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\ggml\src\ggml.c:1333: GGML_ASSERT(wtype != GGML_TYPE_COUNT) failed
+
+2025-08-18 23:04:38,236 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:04:38] "[31m[1mPOST /transcribe HTTP/1.1[0m" 400 -
+2025-08-18 23:04:43,877 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:04:43] "POST /upload HTTP/1.1" 200 -
+2025-08-18 23:04:43,881 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\3e993ced-3945-4c8d-b531-ab0fd2d5a308_recorded_audio.wav -l pt
+2025-08-18 23:04:44,061 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:04:44] "POST /transcribe HTTP/1.1" 200 -
+2025-08-18 23:05:02,133 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:05:02] "POST /upload HTTP/1.1" 200 -
+2025-08-18 23:05:02,145 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:05:02] "GET /uploads/ab4c7bf5-b922-490b-bd38-1c1eb939d091_testewhisper.wav HTTP/1.1" 200 -
+2025-08-18 23:05:04,492 - app - INFO - Executando comando: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\build\bin\Release\whisper-cli.exe -m F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\models\ggml-base.bin -f F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\Whisper_Python\uploads\ab4c7bf5-b922-490b-bd38-1c1eb939d091_testewhisper.wav -l pt
+2025-08-18 23:05:05,843 - werkzeug - INFO - 127.0.0.1 - - [18/Aug/2025 23:05:05] "POST /transcribe HTTP/1.1" 200 -

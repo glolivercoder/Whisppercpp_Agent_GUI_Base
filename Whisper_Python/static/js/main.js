@@ -503,6 +503,8 @@ document.addEventListener('DOMContentLoaded', function() {
             if (waveform) {
                 waveform.load(audioUrl);
             }
+
+            this.enableTranscribeButton();
         },
         
         setRecordedFilename: function(filename) {
