@@ -1,0 +1,11 @@
+{
+  "resumo_do_problema": "A aplicação web está a falhar por duas razões principais: 1. Os ficheiros de áudio carregados não estão acessíveis através de um URL, causando um erro '404 Not Found'. 2. O pedido de transcrição falha com um '400 Bad Request' porque o backend não consegue aceder ao ficheiro de áudio para o processar.",
+  "plano_de_correcao": [
+    {
+      "ficheiro_a_modificar": "Whisper_Python/app.py",
+      "acao": "Adicionar uma nova rota para servir ficheiros estáticos do diretório 'uploads'.",
+      "detalhes": "Uma aplicação Flask requer que uma rota específica seja definida para servir ficheiros de um diretório que não seja a pasta 'static' padrão. Ao adicionar uma rota como '@app.route('/uploads/<path:filename>')', podemos disponibilizar os ficheiros de áudio carregados para o frontend (para o WaveSurfer) e para o backend (para o processo de transcrição)."
+    }
+  ],
+  "notas_documentacao": "A documentação oficial do whisper.cpp foca-se na implementação C++ e no seu próprio exemplo de servidor ('whisper-server'). A aplicação Python neste projeto é uma implementação personalizada. As correções propostas baseiam-se em práticas padrão de desenvolvimento web para aplicações Flask e numa análise direta dos registos de erros."
+}

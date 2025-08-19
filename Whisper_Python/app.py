@@ -28,7 +28,7 @@ except ImportError:
 
 # Caminho para o executável whisper.cpp e modelos
 WHISPER_BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-WHISPER_EXECUTABLE = os.path.join(WHISPER_BASE_DIR, 'build', 'bin', 'Release', 'main.exe')
+WHISPER_EXECUTABLE = os.path.join(WHISPER_BASE_DIR, 'build', 'bin', 'Release', 'whisper-cli.exe')
 MODELS_DIR = os.path.join(WHISPER_BASE_DIR, 'models')
 
 # Criar diretórios necessários se não existirem
@@ -46,7 +46,13 @@ def get_available_models():
     if os.path.exists(MODELS_DIR):
         for file in os.listdir(MODELS_DIR):
             if file.endswith('.bin'):
-                models.append(file)
+                model_path = os.path.join(MODELS_DIR, file)
+                size_in_bytes = os.path.getsize(model_path)
+                size_in_mb = size_in_bytes / (1024 * 1024)
+                models.append({
+                    "name": file,
+                    "size": f"{size_in_mb:.2f} MB"
+                })
     return models
 
 # Função para transcrever áudio usando whisper.cpp
@@ -197,6 +203,10 @@ def upload_file():
         "path": file_path
     })
 
+@app.route('/uploads/<path:filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 @app.route('/transcribe', methods=['POST'])
 def transcribe():
     # Check if request contains JSON data
@@ -240,7 +250,11 @@ def get_transcription(transcription_id):
 @app.route('/models')
 def list_models():
     models = get_available_models()
-    return jsonify({"models": models})
+    return jsonify({"success": True, "models": models})
+
+@app.route('/favicon.ico')
+def favicon():
+    return '', 204
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
