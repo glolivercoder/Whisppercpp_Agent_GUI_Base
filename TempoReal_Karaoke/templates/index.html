@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Whisper Real-Time Karaoke</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { padding-top: 4.5rem; }
+        .tab-content { border: 1px solid #dee2e6; border-top: none; padding: 1.5rem; }
+        #waveform-preprocess, #waveform-video { border: 1px solid #ddd; border-radius: 4px; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Whisper Real-Time Karaoke</a>
+    </div>
+</nav>
+
+<main class="container">
+
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="stream-tab" data-bs-toggle="tab" data-bs-target="#stream-tab-pane" type="button" role="tab" aria-controls="stream-tab-pane" aria-selected="true">Real-time STT</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="preprocess-tab" data-bs-toggle="tab" data-bs-target="#preprocess-tab-pane" type="button" role="tab" aria-controls="preprocess-tab-pane" aria-selected="false">Audio Transcription</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="video-tab" data-bs-toggle="tab" data-bs-target="#video-tab-pane" type="button" role="tab" aria-controls="video-tab-pane" aria-selected="false">Generate Video with SRT</button>
+        </li>
+    </ul>
+
+    <div class="tab-content" id="myTabContent">
+        <!-- Real-time STT Tab -->
+        <div class="tab-pane fade show active" id="stream-tab-pane" role="tabpanel" aria-labelledby="stream-tab" tabindex="0">
+            <h3>Real-time Speech-to-Text</h3>
+            <div class="mb-3">
+                <label for="model-stream" class="form-label">Select Model:</label>
+                <select id="model-stream" class="form-select">
+                    {% for model in models %}
+                    <option value="{{ model }}" {% if 'base.en' in model %}selected{% endif %}>{{ model }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <p>Click "Start" to begin streaming audio from your microphone.</p>
+            <button id="startStream" class="btn btn-primary">Start</button>
+            <button id="stopStream" class="btn btn-danger" disabled>Stop</button>
+            <div class="mt-3">
+                <h5>Transcription:</h5>
+                <div id="transcription" class="p-3 bg-light border rounded" style="min-height: 100px; font-family: monospace;"></div>
+            </div>
+        </div>
+
+        <!-- Audio Transcription Tab -->
+        <div class="tab-pane fade" id="preprocess-tab-pane" role="tabpanel" aria-labelledby="preprocess-tab" tabindex="0">
+            <h3>Audio Transcription from File</h3>
+            <form id="preprocessForm">
+                <div class="mb-3">
+                    <label for="model-preprocess" class="form-label">Select Model:</label>
+                    <select id="model-preprocess" name="model" class="form-select">
+                        {% for model in models %}
+                        <option value="{{ model }}" {% if 'base.en' in model %}selected{% endif %}>{{ model }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="audioFile" class="form-label">Upload Audio File</label>
+                    <input class="form-control" type="file" id="audioFile" name="audioFile" accept="audio/*" required>
+                </div>
+                <div id="waveform-preprocess"></div>
+                <button type="submit" class="btn btn-success mt-3">Transcribe Audio</button>
+            </form>
+            <div class="mt-3">
+                <h5>Transcription Result:</h5>
+                <div id="preprocessResult" class="p-3 bg-light border rounded" style="min-height: 100px; font-family: monospace; white-space: pre-wrap;"></div>
+            </div>
+        </div>
+
+        <!-- Video Generation Tab -->
+        <div class="tab-pane fade" id="video-tab-pane" role="tabpanel" aria-labelledby="video-tab" tabindex="0">
+            <h3>Generate Video with Subtitles</h3>
+            <form id="videoForm">
+                <div class="mb-3">
+                    <label for="model-video" class="form-label">Select Model:</label>
+                    <select id="model-video" name="model" class="form-select">
+                        {% for model in models %}
+                        <option value="{{ model }}" {% if 'base.en' in model %}selected{% endif %}>{{ model }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="videoFile" class="form-label">Upload Video File</label>
+                    <input class="form-control" type="file" id="videoFile" name="videoFile" accept="video/*" required>
+                </div>
+                <div id="waveform-video"></div>
+                <button type="submit" class="btn btn-info mt-3">Generate Video</button>
+            </form>
+            <div id="videoResult" class="mt-3">
+                <!-- Results will be shown here -->
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script src="https://unpkg.com/wavesurfer.js@7"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const socket = io();
+        socket.on('connect', () => console.log('Connected to server'));
+        socket.on('stt_result', (data) => { 
+            const transcriptionDiv = document.getElementById('transcription');
+            transcriptionDiv.textContent += data.text; 
+            transcriptionDiv.scrollTop = transcriptionDiv.scrollHeight;
+        });
+        socket.on('stt_error', (data) => { 
+            alert('STT Error: ' + data.error); 
+            setStreamButtons(false);
+        });
+
+        // --- Waveform Visualization ---
+        const createWaveSurfer = (containerId) => {
+            return WaveSurfer.create({
+                container: containerId,
+                waveColor: 'rgb(200, 100, 200)',
+                progressColor: 'rgb(100, 50, 100)',
+                height: 100,
+                barWidth: 2,
+                barGap: 1,
+                barRadius: 2,
+            });
+        };
+
+        const wavesurferPreprocess = createWaveSurfer('#waveform-preprocess');
+        const wavesurferVideo = createWaveSurfer('#waveform-video');
+
+        const loadFileToWaveSurfer = (fileInputId, wavesurferInstance) => {
+            const fileInput = document.getElementById(fileInputId);
+            fileInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    wavesurferInstance.load(URL.createObjectURL(file));
+                }
+            });
+        };
+
+        loadFileToWaveSurfer('audioFile', wavesurferPreprocess);
+        loadFileToWaveSurfer('videoFile', wavesurferVideo);
+
+
+        // --- Tab 1: Real-time STT ---
+        const startBtn = document.getElementById('startStream');
+        const stopBtn = document.getElementById('stopStream');
+        let mediaRecorder;
+
+        const setStreamButtons = (isStreaming) => {
+            startBtn.disabled = isStreaming;
+            stopBtn.disabled = !isStreaming;
+        }
+
+        startBtn.addEventListener('click', async () => {
+            const selectedModel = document.getElementById('model-stream').value;
+            socket.emit('start_stream', { model: selectedModel });
+            
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream); // MimeType is often not needed
+                mediaRecorder.ondataavailable = e => { if (e.data.size > 0) socket.emit('audio_stream', e.data); };
+                mediaRecorder.start(1000); // Post data every second
+                setStreamButtons(true);
+            } catch (err) { 
+                alert("Error accessing microphone: " + err.message); 
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            if (mediaRecorder && mediaRecorder.state === 'recording') {
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(track => track.stop());
+            }
+            setStreamButtons(false);
+            // We don't disconnect the socket, just stop sending audio
+        });
+
+        // --- Tab 2: Audio Transcription ---
+        const preprocessForm = document.getElementById('preprocessForm');
+        preprocessForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(preprocessForm);
+            // The model is already in the form data thanks to the name="model" attribute
+            const submitButton = preprocessForm.querySelector('button[type="submit"]');
+            const resultDiv = document.getElementById('preprocessResult');
+            submitButton.disabled = true; 
+            resultDiv.textContent = 'Processing...';
+            
+            try {
+                const response = await fetch('/preprocess_audio', { method: 'POST', body: formData });
+                const data = await response.json();
+                resultDiv.textContent = data.status === 'success' ? data.transcription : 'Error: ' + data.message;
+            } catch (error) { 
+                resultDiv.textContent = 'An error occurred: ' + error.message; 
+            } finally { 
+                submitButton.disabled = false; 
+            }
+        });
+
+        // --- Tab 3: Video Generation ---
+        const videoForm = document.getElementById('videoForm');
+        videoForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(videoForm);
+            const submitButton = videoForm.querySelector('button[type="submit"]');
+            const resultDiv = document.getElementById('videoResult');
+            submitButton.disabled = true; 
+            resultDiv.innerHTML = 'Processing...';
+
+            try {
+                const response = await fetch('/generate_video', { method: 'POST', body: formData });
+                const data = await response.json();
+                if (data.status === 'success') {
+                    resultDiv.innerHTML = `Success! <a href="${data.download_url}" download>Download Subtitled Video</a>`;
+                } else {
+                    resultDiv.textContent = 'Error: ' + data.message;
+                }
+            } catch (error) { 
+                resultDiv.textContent = 'An error occurred: ' + error.message; 
+            } finally { 
+                submitButton.disabled = false; 
+            }
+        });
+    });
+</script>
+</body>
+</html>

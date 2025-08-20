@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Manual</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            border-bottom: 2px solid #7f8c8d;
+            padding-bottom: 10px;
+        }
+        code {
+            background-color: #ecf0f1;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 0.9em;
+        }
+        .step {
+            margin-bottom: 1.5rem;
+        }
+        .note {
+            background-color: #fdf9e2;
+            border-left: 4px solid #f1c40f;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Application Manual</h1>
+        <p>This manual provides instructions on how to set up, run, and use the application. All command examples are provided as plain text within code blocks, not as images.</p>
+
+        <h2>1. Prerequisites</h2>
+        <div class="step">
+            <p>Before running the application, ensure you have the following installed and configured:</p>
+            <ul>
+                <li><strong>Python 3.x</strong> installed and added to your system's PATH.</li>
+                <li>The <code>whisper.cpp</code> project successfully compiled. The application depends on the executables (<code>stream.exe</code>, <code>main.exe</code>) being in the <code>build/bin/Release</code> directory.</li>
+                <li>The required GGML models (e.g., <code>ggml-base.en.bin</code>) downloaded and placed in the <code>models</code> directory.</li>
+            </ul>
+        </div>
+
+        <h2>2. Installation</h2>
+        <div class="step">
+            <p>You need to install the required Python libraries. These are listed in the <code>requirements.txt</code> file.</p>
+            <p>Open a terminal or command prompt, navigate to the <code>TempoReal_Karaoke</code> directory, and run the following command:</p>
+            <pre><code>pip install -r requirements.txt</code></pre>
+        </div>
+
+        <h2>3. Running the Application</h2>
+        <div class="step">
+            <p>Once the dependencies are installed, you can start the web server.</p>
+            <p>From the <code>TempoReal_Karaoke</code> directory, run this command:</p>
+            <pre><code>python app.py</code></pre>
+            <p>After running the command, you should see output indicating that the server is running, similar to this:</p>
+            <pre><code> * Serving Flask app 'app'
+ * Running on http://127.0.0.1:5000 (Press CTRL+C to quit)</code></pre>
+            <p>You can now access the application by opening your web browser and navigating to <a href="http://127.0.0.1:5000">http://127.0.0.1:5000</a>.</p>
+        </div>
+
+        <h2>4. Using the Application</h2>
+        <div class="step">
+            <h3>Tab 1: Real-time STT</h3>
+            <p>This tab provides real-time speech-to-text from your microphone.</p>
+            <ol>
+                <li>Click the <strong>Start</strong> button. Your browser may ask for permission to access your microphone.</li>
+                <li>Begin speaking. The transcribed text will appear in the text box below.</li>
+                <li>Click the <strong>Stop</strong> button to end the stream.</li>
+            </ol>
+        </div>
+        <div class="step">
+            <h3>Tab 2: Audio Transcription</h3>
+            <p>This tab allows you to transcribe an entire audio file.</p>
+            <ol>
+                <li>Click "Choose File" and select an audio file from your computer.</li>
+                <li>Click the <strong>Transcribe Audio</strong> button.</li>
+                <li>The transcription will appear in the result box below.</li>
+            </ol>
+        </div>
+        <div class="step">
+            <h3>Tab 3: Generate Video</h3>
+            <p>This tab generates a new video file with burned-in subtitles.</p>
+            <ol>
+                <li>Click "Choose File" and select a video file.</li>
+                <li>Click the <strong>Generate Video</strong> button.</li>
+                <li>The process may take some time depending on the video length.</li>
+                <li>Once complete, a download link for the new video will appear.</li>
+            </ol>
+            <div class="note">
+                <p><strong>Note:</strong> The video generation process is resource-intensive. Processing long videos may be slow and consume significant CPU resources.</p>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

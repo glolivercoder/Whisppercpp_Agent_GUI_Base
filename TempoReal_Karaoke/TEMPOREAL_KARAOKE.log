@@ -1,0 +1,61 @@
+2025-08-20 19:36:09,551 - INFO -  * Restarting with stat
+2025-08-20 19:36:10,029 - WARNING -  * Debugger is active!
+2025-08-20 19:36:10,040 - INFO -  * Debugger PIN: 998-098-366
+2025-08-20 19:36:12,857 - INFO - 127.0.0.1 - - [2025-08-20 19:36:12] "GET /socket.io/?EIO=4&transport=polling&t=PZ9e2LR HTTP/1.1" 200 276 0.031858
+Client connected: kpKDTYSWnrlW1XLhAAAB
+2025-08-20 19:36:12,857 - INFO - Client connected: kpKDTYSWnrlW1XLhAAAB
+2025-08-20 19:36:12,857 - INFO - 127.0.0.1 - - [2025-08-20 19:36:12] "POST /socket.io/?EIO=4&transport=polling&t=PZ9e2R2&sid=ipVc_zIIPDgdj-z6AAAA HTTP/1.1" 200 195 0.000000
+2025-08-20 19:36:12,873 - INFO - 127.0.0.1 - - [2025-08-20 19:36:12] "GET /socket.io/?EIO=4&transport=polling&t=PZ9e2R7&sid=ipVc_zIIPDgdj-z6AAAA HTTP/1.1" 200 189 0.016124
+2025-08-20 19:36:13,183 - INFO - 127.0.0.1 - - [2025-08-20 19:36:13] "GET /socket.io/?EIO=4&transport=polling&t=PZ9e2RE&sid=ipVc_zIIPDgdj-z6AAAA HTTP/1.1" 200 157 0.310541
+Checking models directory: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models
+2025-08-20 19:39:12,327 - INFO - Checking models directory: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models
+Models directory not found at: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models
+2025-08-20 19:39:12,327 - WARNING - Models directory not found at: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models
+Available models: []
+2025-08-20 19:39:12,327 - INFO - Available models: []
+2025-08-20 19:39:12,334 - INFO - 127.0.0.1 - - [2025-08-20 19:39:12] "GET / HTTP/1.1" 200 10891 0.006730
+2025-08-20 19:39:12,351 - INFO - 127.0.0.1 - - [2025-08-20 19:39:12] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 331 0.000999
+2025-08-20 19:39:12,616 - INFO - 127.0.0.1 - - [2025-08-20 19:39:12] "GET /socket.io/?EIO=4&transport=polling&t=PZ9ekJe HTTP/1.1" 200 276 0.000000
+Client connected: WqvD_1A5zrkGtuNbAAAD
+2025-08-20 19:39:12,622 - INFO - Client connected: WqvD_1A5zrkGtuNbAAAD
+2025-08-20 19:39:12,622 - INFO - 127.0.0.1 - - [2025-08-20 19:39:12] "POST /socket.io/?EIO=4&transport=polling&t=PZ9ekJj&sid=hJuYcZFPcQSvGkVNAAAC HTTP/1.1" 200 195 0.000000
+2025-08-20 19:39:12,623 - INFO - 127.0.0.1 - - [2025-08-20 19:39:12] "GET /socket.io/?EIO=4&transport=polling&t=PZ9ekJk&sid=hJuYcZFPcQSvGkVNAAAC HTTP/1.1" 200 189 0.000000
+2025-08-20 19:39:12,626 - INFO - 127.0.0.1 - - [2025-08-20 19:39:12] "GET /favicon.ico HTTP/1.1" 204 104 0.000000
+2025-08-20 19:39:12,928 - INFO - 127.0.0.1 - - [2025-08-20 19:39:12] "GET /socket.io/?EIO=4&transport=polling&t=PZ9ekJn&sid=hJuYcZFPcQSvGkVNAAAC HTTP/1.1" 200 157 0.302604
+Client disconnected: WqvD_1A5zrkGtuNbAAAD
+2025-08-20 19:39:26,193 - INFO - Client disconnected: WqvD_1A5zrkGtuNbAAAD
+Checking models directory: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models
+2025-08-20 19:39:26,201 - INFO - Checking models directory: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models
+Models directory not found at: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models
+2025-08-20 19:39:26,201 - WARNING - Models directory not found at: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models
+Available models: []
+2025-08-20 19:39:26,201 - INFO - Available models: []
+2025-08-20 19:39:26,201 - INFO - 127.0.0.1 - - [2025-08-20 19:39:26] "GET / HTTP/1.1" 200 10891 0.000000
+2025-08-20 19:39:26,215 - INFO - 127.0.0.1 - - [2025-08-20 19:39:26] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 331 0.000997
+2025-08-20 19:39:26,456 - INFO - 127.0.0.1 - - [2025-08-20 19:39:26] "GET /socket.io/?EIO=4&transport=polling&t=PZ9enhs HTTP/1.1" 200 276 0.000999
+Client connected: A-1D24oRpt6e0eUaAAAF
+2025-08-20 19:39:26,460 - INFO - Client connected: A-1D24oRpt6e0eUaAAAF
+2025-08-20 19:39:26,460 - INFO - 127.0.0.1 - - [2025-08-20 19:39:26] "POST /socket.io/?EIO=4&transport=polling&t=PZ9enhw&sid=3plL1V0dFGqzZkvSAAAE HTTP/1.1" 200 195 0.001000
+2025-08-20 19:39:26,462 - INFO - 127.0.0.1 - - [2025-08-20 19:39:26] "GET /socket.io/?EIO=4&transport=polling&t=PZ9enhx&sid=3plL1V0dFGqzZkvSAAAE HTTP/1.1" 200 189 0.000000
+2025-08-20 19:39:26,463 - INFO - 127.0.0.1 - - [2025-08-20 19:39:26] "GET /favicon.ico HTTP/1.1" 204 104 0.000000
+2025-08-20 19:39:26,776 - INFO - 127.0.0.1 - - [2025-08-20 19:39:26] "GET /socket.io/?EIO=4&transport=polling&t=PZ9eni0&sid=3plL1V0dFGqzZkvSAAAE HTTP/1.1" 200 157 0.311936
+Starting stream for A-1D24oRpt6e0eUaAAAF with model 
+2025-08-20 19:39:49,237 - INFO - Starting stream for A-1D24oRpt6e0eUaAAAF with model 
+Attempting to load model from: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models\
+2025-08-20 19:39:49,237 - INFO - Attempting to load model from: F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models\
+Model file not found:  at F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models\
+2025-08-20 19:39:49,237 - ERROR - Model file not found:  at F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\..\..\models\
+WARNING: gevent: Unhandled error with no watcher
+Traceback (most recent call last):
+  File "f:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\venv\Lib\site-packages\gevent\libuv\loop.py", line 44, in python_queue_callback
+    def python_queue_callback(self, watcher_ptr, revents):
+    
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "f:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\venv\Lib\site-packages\gevent\_ffi\loop.py", line 270, in python_check_callback
+    def python_check_callback(self, watcher_ptr): # pylint:disable=unused-argument
+    
+KeyboardInterrupt
+2025-08-20T22:43:57Z
+Permission denied to write to F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\TEMPOREAL_KARAOKE.log. Logging to console only.
+Permission denied to write to F:\Projetos2025BKP\WhispperCC_STT\whisper.cpp\TempoReal_Karaoke\TEMPOREAL_KARAOKE.log. Logging to console only.
