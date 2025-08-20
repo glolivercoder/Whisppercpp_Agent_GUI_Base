@@ -274,7 +274,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(uploadData => {
                 if (uploadData.file_id && uploadData.filename) {
                     // Now transcribe the uploaded file
-                    transcribeFile(uploadData.file_id + '_' + uploadData.filename, model, language, translate, wordTimestamps);
+                    setTimeout(() => {
+                        transcribeFile(uploadData.file_id + '_' + uploadData.filename, model, language, translate, wordTimestamps);
+                    }, 500);
                 } else {
                     throw new Error(uploadData.error || 'Erro ao carregar arquivo gravado');
                 }

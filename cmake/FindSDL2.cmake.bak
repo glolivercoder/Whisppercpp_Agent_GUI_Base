@@ -1,0 +1,130 @@
+# - Locate SDL2 library
+# This module defines
+#  SDL2_LIBRARY, the name of the library to link against
+#  SDL2_FOUND, if false, do not try to link against
+#  SDL2_INCLUDE_DIR, where to find SDL.h
+#
+# This module responds to the the flag:
+#  SDL2_STATIC
+# if set, specifies to use a static version of SDL2
+#
+# On OSX, this will prefer the Framework version (if found) over others.
+# On WIN32, this will search for the library and include paths in the
+# module's directory and in the environment variable SDL2DIR.
+#
+# Don't forget to include SDL2main.lib on windows, and to link with
+# whatever system libraries are required for your application.
+#
+# Also defined, but not for general use are:
+#  SDL2_LIBRARY_TEMP, the full path to the library.
+#  SDL2_INCLUDE_DIR_TEMP, the full path to the include directory.
+#
+# Copyright (c) 2005-2009 Ryan Gordon.
+#
+# This software is provided 'as-is', without any express or implied
+# warranty.  In no event will the authors be held liable for any damages
+# arising from the use of this software.
+#
+# Permission is granted to anyone to use this software for any purpose,
+# including commercial applications, and to alter it and redistribute it
+# freely, subject to the following restrictions:
+#
+# 1. The origin of this software must not be misrepresented; you must not
+#   claim that you wrote the original software. If you use this software
+#   in a product, an acknowledgment in the product documentation would be
+#   appreciated but is not required.
+# 2. Altered source versions must be plainly marked as such, and must not be
+#   misrepresented as being the original software.
+# 3. This notice may not be removed or altered from any source distribution.
+#
+#  Ryan Gordon <icculus@icculus.org>
+
+# First, search for the framework.
+IF (APPLE)
+    FIND_PATH(SDL2_FRAMEWORK_PATH SDL2.framework)
+    IF (SDL2_FRAMEWORK_PATH)
+        SET(SDL2_INCLUDE_DIR_TEMP ${SDL2_FRAMEWORK_PATH}/SDL2.framework/Headers)
+        SET(SDL2_LIBRARY_TEMP ${SDL2_FRAMEWORK_PATH}/SDL2.framework/SDL2)
+    ENDIF (SDL2_FRAMEWORK_PATH)
+ENDIF (APPLE)
+
+# If we're on win32, search in the module's directory and in SDL2DIR.
+IF (WIN32)
+    # Search for the include directory.
+    FIND_PATH(SDL2_INCLUDE_DIR_TEMP SDL.h
+        ${CMAKE_PREFIX_PATH}/include
+        ${CMAKE_MODULE_PATH}
+        ${CMAKE_MODULE_PATH}/SDL2
+        $ENV{SDL2DIR}
+        $ENV{SDL2DIR}/include
+    )
+
+    # Search for the library.
+    IF (SDL2_STATIC)
+        FIND_LIBRARY(SDL2_LIBRARY_TEMP NAMES SDL2-static PATHS
+            ${CMAKE_PREFIX_PATH}/lib
+            ${CMAKE_MODULE_PATH}
+            ${CMAKE_MODULE_PATH}/lib
+            $ENV{SDL2DIR}
+            $ENV{SDL2DIR}/lib
+        )
+    ELSE (SDL2_STATIC)
+        FIND_LIBRARY(SDL2_LIBRARY_TEMP NAMES SDL2 PATHS
+            ${CMAKE_PREFIX_PATH}/lib
+            ${CMAKE_MODULE_PATH}
+            ${CMAKE_MODULE_PATH}/lib
+            $ENV{SDL2DIR}
+            $ENV{SDL2DIR}/lib
+        )
+    ENDIF (SDL2_STATIC)
+ENDIF (WIN32)
+
+# Search for the library and include paths in the system's default locations.
+FIND_PATH(SDL2_INCLUDE_DIR_TEMP SDL2/SDL.h)
+IF (SDL2_STATIC)
+    FIND_LIBRARY(SDL2_LIBRARY_TEMP NAMES SDL2-static)
+ELSE (SDL2_STATIC)
+    FIND_LIBRARY(SDL2_LIBRARY_TEMP NAMES SDL2)
+ENDIF (SDL2_STATIC)
+
+# If the library and include directory were found, set the final variables.
+IF (SDL2_LIBRARY_TEMP AND SDL2_INCLUDE_DIR_TEMP)
+    SET(SDL2_FOUND TRUE)
+    SET(SDL2_LIBRARY ${SDL2_LIBRARY_TEMP})
+    SET(SDL2_INCLUDE_DIR ${SDL2_INCLUDE_DIR_TEMP})
+ENDIF (SDL2_LIBRARY_TEMP AND SDL2_INCLUDE_DIR_TEMP)
+
+# If the library was not found, try to use sdl2-config.
+IF (NOT SDL2_FOUND)
+    FIND_PROGRAM(SDL2_CONFIG sdl2-config)
+    IF (SDL2_CONFIG)
+        # Get the include directory.
+        EXEC_PROGRAM(${SDL2_CONFIG} ARGS --cflags OUTPUT_VARIABLE SDL2_CFLAGS)
+        STRING(REGEX REPLACE "-I" "" SDL2_INCLUDE_DIR_TEMP "${SDL2_CFLAGS}")
+        STRING(REGEX REPLACE " " "" SDL2_INCLUDE_DIR_TEMP "${SDL2_INCLUDE_DIR_TEMP}")
+
+        # Get the library.
+        IF (SDL2_STATIC)
+            EXEC_PROGRAM(${SDL2_CONFIG} ARGS --static-libs OUTPUT_VARIABLE SDL2_LDFLAGS)
+        ELSE (SDL2_STATIC)
+            EXEC_PROGRAM(${SDL2_CONFIG} ARGS --libs OUTPUT_VARIABLE SDL2_LDFLAGS)
+        ENDIF (SDL2_STATIC)
+        STRING(REGEX REPLACE "-L" "" SDL2_LIBRARY_TEMP "${SDL2_LDFLAGS}")
+        STRING(REGEX REPLACE "-l" "" SDL2_LIBRARY_TEMP "${SDL2_LIBRARY_TEMP}")
+        STRING(REGEX REPLACE " " "" SDL2_LIBRARY_TEMP "${SDL2_LIBRARY_TEMP}")
+
+        # If the library and include directory were found, set the final variables.
+        IF (SDL2_LIBRARY_TEMP AND SDL2_INCLUDE_DIR_TEMP)
+            SET(SDL2_FOUND TRUE)
+            SET(SDL2_LIBRARY ${SDL2_LIBRARY_TEMP})
+            SET(SDL2_INCLUDE_DIR ${SDL2_INCLUDE_DIR_TEMP})
+        ENDIF (SDL2_LIBRARY_TEMP AND SDL2_INCLUDE_DIR_TEMP)
+    ENDIF (SDL2_CONFIG)
+ENDIF (NOT SDL2_FOUND)
+
+# If the library was not found, show an error message.
+IF (NOT SDL2_FOUND)
+    IF (SDL2_FIND_REQUIRED)
+        MESSAGE(FATAL_ERROR "Could not find SDL2 library")
+    ENDIF (SDL2_FIND_REQUIRED)
+ENDIF (NOT SDL2_FOUND)

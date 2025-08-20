@@ -216,6 +216,8 @@ def transcribe():
         # If not JSON, try to get form data
         data = request.form.to_dict()
     
+    logger.info(f"Received data for transcription: {data}")
+
     # Check for required data
     if not data or 'filename' not in data:
         return jsonify({"success": False, "error": "Nome do arquivo não fornecido"}), 400
@@ -226,7 +228,8 @@ def transcribe():
     
     # Construct full file path
     file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-    
+    logger.info(f"Constructed file path for transcription: {file_path}")
+
     # Transcribe audio
     result = transcribe_audio(file_path, model, language)
     
